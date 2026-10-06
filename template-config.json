@@ -1,0 +1,288 @@
+{
+  "services": {
+    "84bf10c6-4f76-459a-a0dc-b97f5c021204": {
+      "icon": "https://cdn.jsdelivr.net/gh/elie222/inbox-zero@main/apps/web/public/icons/icon-192x192.png",
+      "name": "Inbox Zero",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": "/api/health",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/inbox-zero-railway",
+        "rootDirectory": "/"
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>": {}
+        }
+      },
+      "variables": {
+        "PORT": {
+          "defaultValue": "3000",
+          "description": "Port Inbox Zero listens on - leave as is",
+          "isOptional": false
+        },
+        "HOSTNAME": {
+          "defaultValue": "::",
+          "description": "Listen on IPv4 and IPv6 - leave as is",
+          "isOptional": false
+        },
+        "NEXT_PUBLIC_BASE_URL": {
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public URL - set it to your custom domain after adding one, and update the OAuth redirect URIs to match",
+          "isOptional": false
+        },
+        "AUTH_ALLOWED_EMAILS": {
+          "defaultValue": "",
+          "description": "Comma-separated email addresses allowed to sign up - everyone else is refused, so nobody else can use your AI key",
+          "isOptional": false
+        },
+        "GOOGLE_CLIENT_ID": {
+          "defaultValue": "",
+          "description": "Google OAuth client ID (see the template README for the redirect URIs) - set to skipped if you only use Outlook",
+          "isOptional": false
+        },
+        "GOOGLE_CLIENT_SECRET": {
+          "defaultValue": "",
+          "description": "Google OAuth client secret - set to skipped if you only use Outlook",
+          "isOptional": false
+        },
+        "GOOGLE_PUBSUB_TOPIC_NAME": {
+          "defaultValue": "",
+          "description": "Pub/Sub topic for Gmail push notifications: projects/<project-id>/topics/<topic> - set to skipped if you only use Outlook",
+          "isOptional": false
+        },
+        "GOOGLE_PUBSUB_VERIFICATION_TOKEN": {
+          "defaultValue": "${{secret(32, \"abcdef0123456789\")}}",
+          "description": "Token for the Pub/Sub push endpoint: https://<domain>/api/google/webhook?token=<this value>",
+          "isOptional": false
+        },
+        "MICROSOFT_CLIENT_ID": {
+          "defaultValue": "",
+          "description": "Microsoft Entra application (client) ID - optional, for Outlook accounts",
+          "isOptional": true
+        },
+        "MICROSOFT_CLIENT_SECRET": {
+          "defaultValue": "",
+          "description": "Microsoft Entra client secret value - optional, for Outlook accounts",
+          "isOptional": true
+        },
+        "MICROSOFT_WEBHOOK_CLIENT_STATE": {
+          "defaultValue": "${{secret(32, \"abcdef0123456789\")}}",
+          "description": "Verifies Outlook webhook notifications - leave as is",
+          "isOptional": false
+        },
+        "LLM_API_KEY": {
+          "defaultValue": "",
+          "description": "API key for the provider in DEFAULT_LLMS (Anthropic, OpenAI, Google, OpenRouter, ...) - needs API billing, not a chat subscription",
+          "isOptional": false
+        },
+        "DEFAULT_LLMS": {
+          "defaultValue": "anthropic:claude-sonnet-5-5",
+          "description": "Main model as provider:model, e.g. openai:gpt-6-luna or google:gemini-3.8-flash",
+          "isOptional": false
+        },
+        "ECONOMY_LLMS": {
+          "defaultValue": "anthropic:claude-haiku-4-5",
+          "description": "Cheaper model for high-volume tasks, same provider:model format - optional, falls back to DEFAULT_LLMS",
+          "isOptional": true
+        },
+        "NEXT_PUBLIC_BYPASS_PREMIUM_CHECKS": {
+          "defaultValue": "true",
+          "description": "Unlocks all features on a self-hosted instance - leave as is",
+          "isOptional": false
+        },
+        "NEXT_PUBLIC_EMAIL_SEND_ENABLED": {
+          "defaultValue": "true",
+          "description": "Allows sending and replying from Inbox Zero",
+          "isOptional": false
+        },
+        "DATABASE_URL": {
+          "defaultValue": "postgresql://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}?schema=public",
+          "description": "Postgres connection - private network, leave as is",
+          "isOptional": false
+        },
+        "DIRECT_URL": {
+          "defaultValue": "postgresql://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}?schema=public",
+          "description": "Postgres connection for migrations - leave as is",
+          "isOptional": false
+        },
+        "REDIS_HTTP_URL": {
+          "defaultValue": "http://${{Redis-HTTP.RAILWAY_PRIVATE_DOMAIN}}:80",
+          "description": "Upstash-compatible Redis REST proxy - private network, leave as is",
+          "isOptional": false
+        },
+        "REDIS_HTTP_TOKEN": {
+          "defaultValue": "${{Redis-HTTP.SRH_TOKEN}}",
+          "description": "Token for the Redis REST proxy - leave as is",
+          "isOptional": false
+        },
+        "REDIS_URL": {
+          "defaultValue": "redis://default:${{Redis.REDIS_PASSWORD}}@${{Redis.RAILWAY_PRIVATE_DOMAIN}}:6379?family=0",
+          "description": "Redis for live inbox updates - private network, leave as is",
+          "isOptional": false
+        },
+        "INTERNAL_API_URL": {
+          "defaultValue": "http://localhost:3000",
+          "description": "Background jobs call the app inside its own container - leave as is",
+          "isOptional": false
+        },
+        "AUTH_SECRET": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Signs login sessions",
+          "isOptional": false
+        },
+        "EMAIL_ENCRYPT_SECRET": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Encrypts stored OAuth tokens - never change after the first sign-in",
+          "isOptional": false
+        },
+        "EMAIL_ENCRYPT_SALT": {
+          "defaultValue": "${{secret(32, \"abcdef0123456789\")}}",
+          "description": "Salt for token encryption - never change after the first sign-in",
+          "isOptional": false
+        },
+        "INTERNAL_API_KEY": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Authenticates internal job calls",
+          "isOptional": false
+        },
+        "API_KEY_SALT": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Salt for hashing user API keys - never change",
+          "isOptional": false
+        },
+        "CRON_SECRET": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Authenticates the built-in scheduled jobs",
+          "isOptional": false
+        },
+        "RAILWAY_HEALTHCHECK_TIMEOUT_SEC": {
+          "defaultValue": "600",
+          "description": "First boot waits for Postgres and runs the database migrations",
+          "isOptional": false
+        }
+      }
+    },
+    "5795ddee-4c98-4b74-81d2-ef8c21aed880": {
+      "icon": "https://devicons.railway.app/i/redis.svg",
+      "name": "Redis-HTTP",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "hiett/serverless-redis-http:0.0.10"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "SRH_MODE": {
+          "defaultValue": "env",
+          "description": "Single Redis connection from the variables below - leave as is",
+          "isOptional": false
+        },
+        "SRH_TOKEN": {
+          "defaultValue": "${{secret(64, \"abcdef0123456789\")}}",
+          "description": "Bearer token Inbox Zero uses for the proxy",
+          "isOptional": false
+        },
+        "SRH_CONNECTION_STRING": {
+          "defaultValue": "redis://:${{Redis.REDIS_PASSWORD}}@${{Redis.RAILWAY_PRIVATE_DOMAIN}}:6379",
+          "description": "Redis on the private network - leave as is",
+          "isOptional": false
+        },
+        "SRH_IPV6": {
+          "defaultValue": "true",
+          "description": "Listen on IPv6 for Railway's private network - leave as is",
+          "isOptional": false
+        }
+      }
+    },
+    "20d5490c-7652-4f9d-b23c-223d1a0c26d0": {
+      "icon": "https://devicons.railway.app/i/redis.svg",
+      "name": "Redis",
+      "build": {},
+      "deploy": {
+        "startCommand": "/bin/sh -c \"rm -rf /data/lost+found && exec docker-entrypoint.sh redis-server --requirepass $REDIS_PASSWORD --appendonly yes --dir /data\"",
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "redis:8.10.2-alpine"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "REDIS_PASSWORD": {
+          "defaultValue": "${{secret(32)}}",
+          "description": "Auto-generated Redis password",
+          "isOptional": false
+        }
+      },
+      "volumeMounts": {
+        "20d5490c-7652-4f9d-b23c-223d1a0c26d0": {
+          "mountPath": "/data"
+        }
+      }
+    },
+    "b1dab965-c446-483a-a8cd-ce71a87e3144": {
+      "icon": "https://devicons.railway.app/i/postgresql.svg",
+      "name": "Postgres",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/railwayapp-templates/postgres-ssl:17"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "variables": {
+        "POSTGRES_DB": {
+          "defaultValue": "inboxzero",
+          "description": "Database name",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "inboxzero",
+          "description": "Database user",
+          "isOptional": false
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Auto-generated database password",
+          "isOptional": false
+        },
+        "PGDATA": {
+          "defaultValue": "/var/lib/postgresql/data/pgdata",
+          "description": "Data subdirectory - keeps Postgres happy on Railway volumes",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time for Postgres to shut down cleanly on redeploy",
+          "isOptional": false
+        }
+      },
+      "volumeMounts": {
+        "b1dab965-c446-483a-a8cd-ce71a87e3144": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      }
+    }
+  }
+}
