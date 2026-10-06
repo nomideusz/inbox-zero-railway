@@ -69,7 +69,7 @@ The stack is four services: Inbox Zero, Redis-HTTP, Redis and Postgres.
 
 **Sign in** at `https://YOUR_DOMAIN` with Google or Microsoft, using an address listed in `AUTH_ALLOWED_EMAILS`. To add teammates, extend that list, or set `AUTH_ALLOWED_EMAIL_DOMAINS=yourcompany.com` instead.
 
-**Memory.** Expect about 0.75 GB at idle: about 550 MB for Inbox Zero, 75 MB for Redis-HTTP, 100 MB for Postgres and under 10 MB for Redis. That is above the Trial plan's limit, so deploy on Hobby or above.
+**Memory.** Expect about 1.1 GB at idle on Railway: about 0.9 GB for Inbox Zero, 120 MB each for Redis-HTTP and Postgres, and under 10 MB for Redis. Inbox Zero alone is over the Trial plan's limit, so deploy on Hobby or above.
 
 **Custom domain.** Add it in the Inbox Zero service's Settings → Networking. Set `NEXT_PUBLIC_BASE_URL` to `https://your.domain`, then update the OAuth redirect URIs and the Pub/Sub push endpoint to the new domain.
 

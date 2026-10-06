@@ -5,5 +5,6 @@
   "category": "AI/ML",
   "image": "https://cdn.jsdelivr.net/gh/elie222/inbox-zero@main/apps/web/public/icons/icon-192x192.png",
   "card_desc": "Inbox Zero AI email assistant for Gmail and Outlook: plain-English rules that label, archive and draft replies, plus bulk unsubscribe and digests, with your own LLM key, Postgres, Redis and built-in scheduled jobs.",
-  "deploy_marker": "nomideusz/inbox-zero-railway"
+  "deploy_marker": "nomideusz/inbox-zero-railway",
+  "id": "b4bcfe4b-842e-4b03-8847-b128dda252f0"
 }

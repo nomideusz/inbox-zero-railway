@@ -18,7 +18,7 @@ export SKIP_DB_MIGRATIONS=true
 # needs no extra service.
 cron() { # <path> <interval seconds>
   # start.sh's placeholder rewrite can take a minute or two before the server listens
-  until wget -q -O /dev/null "http://127.0.0.1:${PORT:-3000}/api/health"; do sleep 10; done
+  until wget -q -O /dev/null "http://127.0.0.1:${PORT:-3000}/api/health" 2>/dev/null; do sleep 10; done
   while :; do
     wget -q -O /dev/null --header "Authorization: Bearer $CRON_SECRET" \
       "http://127.0.0.1:${PORT:-3000}$1" || echo "[cron] $1 failed"
