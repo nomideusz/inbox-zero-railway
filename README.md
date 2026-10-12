@@ -1,6 +1,6 @@
 # Deploy and Host Inbox Zero on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/inbox-zero?utm_medium=integration&utm_source=button&utm_campaign=inbox-zero)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/inbox-zero?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=inbox-zero)
 
 [Inbox Zero](https://www.getinboxzero.com/) is the open-source AI email assistant for Gmail and Outlook. You describe how you want your email handled in plain English: label and archive newsletters, draft replies in your voice, flag cold outreach, follow up on threads nobody answered. Inbox Zero applies those rules to new mail as it arrives. It also has one-click bulk unsubscribe, a reply tracker, email digests, meeting briefs and an assistant chat over your inbox. This template runs the full self-hosted version with every premium feature unlocked, using your own AI provider key, so your mail never passes through someone else's SaaS.
 
