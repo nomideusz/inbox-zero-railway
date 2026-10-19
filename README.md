@@ -36,7 +36,7 @@ The stack is four services: Inbox Zero, Redis-HTTP, Redis and Postgres.
 - [Microsoft OAuth setup](https://docs.getinboxzero.com/hosting/microsoft-oauth)
 - [LLM providers and model settings](https://docs.getinboxzero.com/hosting/llm-setup)
 - [Inbox Zero on GitHub](https://github.com/elie222/inbox-zero)
-- [Template source on GitHub](https://github.com/nomideusz/inbox-zero-railway)
+- [Template source on GitHub](https://github.com/two-workspaces/inbox-zero)
 
 ### Implementation Details
 
